@@ -1,3 +1,7 @@
 {
-  "hello": "Hello startup!"
+  "hello": "Hello startup!",
+  "nextStartup": "NExt startup",
+  "aboutPage": "About Page",
+  "frameworks": "Frameworks",
+  "other": "Other"
 }
