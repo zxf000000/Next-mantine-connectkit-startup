@@ -1,7 +1,10 @@
 # next start up project
 
-# framework
+# Framework
 
 * connectKit
 * mantine
 * nextjs
+* next-i18next
+* typescript
+* eslint
