@@ -11,14 +11,6 @@ const AppBar = () => {
                 <UnstyledButton component={Link} href={"/"}>
                     NExt startup
                 </UnstyledButton>
-                <Group>
-                    <Link href={"/"}>
-                        HOME
-                    </Link>
-                    <Link href={"/about"}>
-                        ABOUT
-                    </Link>
-                </Group>
                 <ConnectKitButton></ConnectKitButton>
             </Flex>
         </Box>
