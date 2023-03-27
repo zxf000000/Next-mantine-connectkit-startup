@@ -15,7 +15,10 @@ const handler: NextApiHandler = async (req, res) => {
                     }
                 })
                 if (user) {
-                    const wallet = await prisma.wallet.create({
+                    const wallet = await prisma.wallet.update({
+                        where: {
+                          id: req.body.id
+                        },
                         data: {
                             fp_number: req.body.fp_number,
                             address: req.body.address,

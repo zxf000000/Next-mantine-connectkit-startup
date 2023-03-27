@@ -29,3 +29,5 @@ const handler: NextApiHandler = async (req, res) => {
             res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 }
+
+export default handler;

@@ -27,7 +27,7 @@ function useRequest({url, method, params, data, enabled = true}: UseRequestProps
     }
 }
 
-export function useWallets(address: string) {
+export function useWallets() {
     const {data, mutate, error, loading} = useRequest({
         url: "/api/wallets",
         method: "GET",

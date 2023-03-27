@@ -15,17 +15,12 @@ const handler: NextApiHandler = async (req, res) => {
                     }
                 })
                 if (user) {
-                    const wallet = await prisma.wallet.create({
-                        data: {
-                            fp_number: req.body.fp_number,
-                            address: req.body.address,
-                            mnemonic: req.body.mnemonic,
-                            p_key: req.body.p_key,
-                            user_id: user.id,
-                            mm_pwd: req.body.mm_pwd,
-                        }
+                    const wallet = await prisma.wallet.delete({
+                        where: {
+                            id: req.body.id
+                        },
                     })
-                    res.status(200).json(wallet);
+                    res.status(201).json(wallet);
                 } else {
                     res.status(404).end();
                 }

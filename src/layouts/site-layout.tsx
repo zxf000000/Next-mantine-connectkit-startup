@@ -56,7 +56,6 @@ const SiteLayout: React.FC<React.PropsWithChildren> = ({children}) => {
                 </Box>
             </Navbar>
             }
-            footer={<AppFooter></AppFooter>}
             styles={(theme) => ({
                 main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[0] },
             })}
