@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int         @id @default(autoincrement())
+  signature  String      @unique
+  name       String?
+  wallets    Wallet[]
+  ecosystoms Ecosystem[]
+  jobs       Job[]
+}
+
+model Category {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String?
+  ecosystems  Ecosystem[]
+}
+
+model Chain {
+  id      Int    @id @default(autoincrement())
+  chainId String
+  name    String
+  rpc     String
+  explore String
+  jobs    Job[]
+}
+
+model Ecosystem {
+  id           Int      @id @default(autoincrement())
+  name         String
+  logo         String
+  homepage     String
+  chain_id     String
+  category     Category @relation(fields: [category_id], references: [id])
+  category_id  Int
+  is_ico       Boolean
+  twitter_fans Int
+  description  String
+  financing    String
+  suggestion   String
+  user         User     @relation(fields: [user_id], references: [id])
+  user_id      Int
+  jobs         Job[]
+}
+
+model Job {
+  id          Int       @id @default(autoincrement())
+  ecosystem   Ecosystem @relation(fields: [ecosystemId], references: [id])
+  ecosystemId Int
+  homepage    String
+  description String
+  network     Chain     @relation(fields: [networkId], references: [id])
+  networkId   Int
+  remarks     String
+  doneWallets Wallet[]
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  JobDone     JobDone[]
+}
+
+model Account {
+  id            Int     @id @default(autoincrement())
+  fp_number     String? @unique
+  phone         Int?
+  country       String?
+  paassword     String?
+  gmail         String?
+  verifier      String?
+  assist_email  String?
+  twitter       String?
+  discord_token String?
+  username      String?
+  ip            String?
+}
+
+model Wallet {
+  id        Int       @id @default(autoincrement())
+  fp_number String?
+  address   String
+  mnemonic  String?
+  p_key     String?
+  user      User      @relation(fields: [user_id], references: [id])
+  user_id   Int
+  mm_pwd    String
+  doneJobs  Job[]
+  JobDone   JobDone[]
+}
+
+model JobDone {
+  wallet     Wallet   @relation(fields: [walletId], references: [id])
+  walletId   Int
+  job        Job      @relation(fields: [jobId], references: [id])
+  jobId      Int
+  assignedAt DateTime @default(now())
+
+  @@id([walletId, jobId])
+}
