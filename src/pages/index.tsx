@@ -3,12 +3,36 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import {useTranslation} from "next-i18next";
 import {NextPageWithLayout} from "@/pages/_app";
 import {getLayout} from "@/layouts/site-layout";
-import {Center, Container} from "@mantine/core";
+import {Button, Center, Container} from "@mantine/core";
+import {useAccount, useConnect, useNetwork, useSignMessage} from "wagmi";
+import {getCsrfToken, signIn, useSession} from "next-auth/react";
+import {SiweMessage} from "siwe";
+import {useEffect} from "react";
+import {ConnectKitButton} from "connectkit";
 
 
 
 const Home: NextPageWithLayout = () => {
   const {t} = useTranslation("common");
+  const {signMessageAsync} = useSignMessage();
+  const {chain} = useNetwork();
+  const {address, isConnected} = useAccount();
+  const {connect} = useConnect();
+  // const {data: session, status} = useSession();.
+  const handleSignin = async () => {
+    try {
+      const res = await fetch("/api/hello");
+    } catch (error) {
+      window.alert(error);
+    }
+  }
+
+  useEffect(() => {
+    // console.log(isConnected);
+    // if (isConnected && !session) {
+    //   handleSignin();
+    // }
+  }, [isConnected]);
   return (
     <>
       <Head>
@@ -20,6 +44,10 @@ const Home: NextPageWithLayout = () => {
       <Container maw={"xl"}>
         <Center>
             {t("hello")}
+          <ConnectKitButton></ConnectKitButton>
+          <Button onClick={handleSignin}>
+            SignIn
+          </Button>
         </Center>
       </Container>
     </>
@@ -39,6 +67,14 @@ export async function getStaticProps({ locale }: Props) {
     },
   }
 }
+
+// export async function getServerSideProps(context: any) {
+//   return {
+//     props: {
+//       csrfToken: await getCsrfToken(context),
+//     },
+//   }
+// }
 
 Home.getLayout = getLayout;
 

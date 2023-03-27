@@ -11,8 +11,8 @@ datasource db {
 }
 
 model User {
-  id         Int         @id @default(autoincrement())
-  signature  String      @unique
+  id         String      @id @default(cuid())
+  address    String      @unique
   name       String?
   wallets    Wallet[]
   ecosystoms Ecosystem[]
@@ -49,7 +49,7 @@ model Ecosystem {
   financing    String
   suggestion   String
   user         User     @relation(fields: [user_id], references: [id])
-  user_id      Int
+  user_id      String
   jobs         Job[]
 }
 
@@ -64,11 +64,11 @@ model Job {
   remarks     String
   doneWallets Wallet[]
   user        User      @relation(fields: [userId], references: [id])
-  userId      Int
+  userId      String
   JobDone     JobDone[]
 }
 
-model Account {
+model SocialAccout {
   id            Int     @id @default(autoincrement())
   fp_number     String? @unique
   phone         Int?
@@ -90,7 +90,7 @@ model Wallet {
   mnemonic  String?
   p_key     String?
   user      User      @relation(fields: [user_id], references: [id])
-  user_id   Int
+  user_id   String
   mm_pwd    String
   doneJobs  Job[]
   JobDone   JobDone[]
