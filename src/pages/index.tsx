@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import {useTranslation} from "next-i18next";
 import {NextPageWithLayout} from "@/pages/_app";
 import {getLayout} from "@/layouts/site-layout";
-import {Button, Center, Container} from "@mantine/core";
+import {Button, Center, Container, Text, Title} from "@mantine/core";
 import {useAccount, useConnect, useNetwork, useSignMessage} from "wagmi";
 import {getCsrfToken, signIn, useSession} from "next-auth/react";
 import {SiweMessage} from "siwe";
@@ -14,25 +14,7 @@ import {ConnectKitButton} from "connectkit";
 
 const Home: NextPageWithLayout = () => {
   const {t} = useTranslation("common");
-  const {signMessageAsync} = useSignMessage();
-  const {chain} = useNetwork();
-  const {address, isConnected} = useAccount();
-  const {connect} = useConnect();
-  // const {data: session, status} = useSession();.
-  const handleSignin = async () => {
-    try {
-      const res = await fetch("/api/hello");
-    } catch (error) {
-      window.alert(error);
-    }
-  }
 
-  useEffect(() => {
-    // console.log(isConnected);
-    // if (isConnected && !session) {
-    //   handleSignin();
-    // }
-  }, [isConnected]);
   return (
     <>
       <Head>
@@ -41,13 +23,9 @@ const Home: NextPageWithLayout = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container maw={"xl"}>
-        <Center>
-            {t("hello")}
-          <ConnectKitButton></ConnectKitButton>
-          <Button onClick={handleSignin}>
-            SignIn
-          </Button>
+      <Container fluid h={"100%"}>
+        <Center h={"100%"}>
+          <Title fw={900}>撸猫项目管理</Title>
         </Center>
       </Container>
     </>

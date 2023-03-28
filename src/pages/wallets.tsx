@@ -1,6 +1,6 @@
 import {NextPageWithLayout} from "@/pages/_app";
 import {getLayout} from "@/layouts/site-layout";
-import {ActionIcon, Button, Container, Flex, Modal, Space, Table} from "@mantine/core";
+import {ActionIcon, Button, Container, Flex, Modal, Space, Table, Title} from "@mantine/core";
 import AddWalletDialog from "@/components/add-wallet-dialog";
 import {useEffect, useState} from "react";
 import {useWallets} from "@/utils/api/fetches";
@@ -8,6 +8,7 @@ import {IconDropletCancel, IconEdit, IconTrash} from "@tabler/icons-react";
 import {Wallet} from "@/utils/data-types";
 import {showError, showSuccess} from "@/notification";
 import {deleteWallet} from "@/utils/api/posts";
+import LmTable from "@/components/lm-table";
 
 const WalletsPage: NextPageWithLayout = () => {
     const [showDialog, setShowDialog] = useState(false);
@@ -58,6 +59,7 @@ const WalletsPage: NextPageWithLayout = () => {
 
     return (
         <Container fluid>
+            <Title>钱包</Title>
             <Flex align={"center"} justify={"flex-end"}>
                 <Button onClick={() => {
                     setCurrentWallet(null);
@@ -67,7 +69,8 @@ const WalletsPage: NextPageWithLayout = () => {
                 </Button>
             </Flex>
             <Space h={30}></Space>
-            <Table highlightOnHover={true} withBorder withColumnBorders>
+            <LmTable
+                highlightOnHover={true} withBorder withColumnBorders>
                 <thead>
                 <tr>
                     <th>
@@ -133,7 +136,7 @@ const WalletsPage: NextPageWithLayout = () => {
                     })
                 }
                 </tbody>
-            </Table>
+            </LmTable>
             <AddWalletDialog
                 onCreated={mutate}
                 show={showDialog}

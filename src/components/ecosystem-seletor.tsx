@@ -1,25 +1,24 @@
-import { Chain } from "@prisma/client";
+import {Chain, Ecosystem} from "@prisma/client";
 import {useEffect, useState} from "react";
-import {useChains} from "@/utils/api/fetches";
+import {useChains, useEcosystems} from "@/utils/api/fetches";
 import {Select, SelectItem} from "@mantine/core";
 
 type Props = {
-    value: Chain | null,
-    onChange: (chain: Chain) => void;
+    value: Ecosystem | null,
+    onChange: (chain: Ecosystem) => void;
 }
 
-const ChainSelector = ({value, onChange}: Props) => {
-    const [chains, setChains] = useState<Chain[]>([]);
+const EcosystemSelector = ({value, onChange}: Props) => {
+    const [chains, setChains] = useState<Ecosystem[]>([]);
     const [chainValues, setChainValues] = useState<{
         value: string,
         label: string,
-        item: Chain
+        item: Ecosystem
     }[]>([])
-
     const [selected, setSelected] = useState<{
         value: string,
         label: string,
-        item: Chain
+        item: Ecosystem
     } | null>(null);
 
     useEffect(() => {
@@ -41,7 +40,7 @@ const ChainSelector = ({value, onChange}: Props) => {
             onChange(item);
         }
     }
-    const {data, loading} = useChains();
+    const {data, loading} = useEcosystems();
     useEffect(() => {
         if (data) {
             setChains(data);
@@ -60,7 +59,7 @@ const ChainSelector = ({value, onChange}: Props) => {
 
     return (
         <Select
-            label={"选择网络"}
+            label={"选择生态"}
             data={chainValues}
             value={selected?.value}
             onChange={handleChange}
@@ -68,4 +67,4 @@ const ChainSelector = ({value, onChange}: Props) => {
     )
 }
 
-export default ChainSelector;
+export default EcosystemSelector;

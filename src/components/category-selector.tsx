@@ -60,6 +60,7 @@ const CategorySelector = ({value, onChange}: Props) => {
         <Select
             label={"选择板块"}
             data={itemValues}
+            value={selected?.value}
             onChange={handleChange}
         ></Select>
     )

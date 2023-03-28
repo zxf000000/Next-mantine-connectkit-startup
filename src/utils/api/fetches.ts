@@ -83,5 +83,20 @@ export function useEcosystems() {
     }
 }
 
+export function useJobs() {
+    const {data, mutate, error, loading} = useRequest({
+        url: "/api/jobs",
+        method: "GET",
+        enabled: true
+    })
+    return {
+        data,
+        mutate,
+        loading,
+        error,
+    }
+}
+
+
 
 

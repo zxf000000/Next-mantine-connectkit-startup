@@ -11,6 +11,5 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const result = await siweServer.getSession(req, res);
-  console.log(result, "result");
   res.status(200).json({ name: 'John Doe' })
 }

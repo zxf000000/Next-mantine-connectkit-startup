@@ -1,3 +1,5 @@
+import {Chain, Ecosystem, Job} from "@prisma/client";
+
 export type Wallet = {
     id: number,
     address: string,
@@ -6,3 +8,9 @@ export type Wallet = {
     p_key: string,
     fp_number: string,
 }
+
+
+export type JobModel = Job & {
+    ecosystem: Ecosystem,
+    network: Chain,
+};

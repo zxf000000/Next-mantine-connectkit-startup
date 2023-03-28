@@ -9,8 +9,9 @@ import {IconEdit, IconTrash} from "@tabler/icons-react";
 import {deleteEcosystem} from "@/utils/api/posts";
 import {showError, showSuccess} from "@/notification";
 import AddEcosystemModal from "@/components/add-ecosystem-modal";
+import LmTable from "@/components/lm-table";
 
-const ChainsPage: NextPageWithLayout = () => {
+const EcosystemsPage: NextPageWithLayout = () => {
     const [openModal, setOpenModal] = useState(false);
     const [currentItem, setCurrentItem] = useState<Ecosystem | null>(null);
     const [items, setItems] = useState<Ecosystem[]>([]);
@@ -67,7 +68,7 @@ const ChainsPage: NextPageWithLayout = () => {
             </Button>
         </Flex>
         <Space h={20}></Space>
-        <Table withBorder>
+        <LmTable withBorder>
             <thead>
             <tr>
                 <th>
@@ -168,7 +169,7 @@ const ChainsPage: NextPageWithLayout = () => {
                 ))
             }
             </tbody>
-        </Table>
+        </LmTable>
         <Modal
             centered
             opened={confirmOpen} onClose={handleConfirmClose}
@@ -188,6 +189,6 @@ const ChainsPage: NextPageWithLayout = () => {
     </Container>
 }
 
-ChainsPage.getLayout = getLayout;
+EcosystemsPage.getLayout = getLayout;
 
-export default ChainsPage;
+export default EcosystemsPage;

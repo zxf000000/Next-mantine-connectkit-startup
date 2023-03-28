@@ -1,5 +1,5 @@
 import request from "@/utils/api/request";
-import {Category, Chain, Ecosystem} from "@prisma/client";
+import {Category, Chain, Ecosystem, Job} from "@prisma/client";
 
 type AddWalletProps = {
     address: string,
@@ -107,7 +107,7 @@ export function addEcosystem(props: EcoProps) {
 }
 
 export function updateEcosystem(props: Pick<Ecosystem, "name" | "description" | "homepage" | "twitter_fans" | "category_id"
-    | "logo" | "is_ico" | "financing" | "suggestion" | "id">) {
+    | "logo" | "is_ico" | "financing" | "suggestion" | "id" | "chainId">) {
     return request({
         url: "/api/ecosystems/update",
         method: "POST",
@@ -125,5 +125,31 @@ export function deleteEcosystem(id: number) {
     })
 }
 
+export function addJobs(props: Pick<Job, "ecosystemId" | "homepage" | "description" | "networkId" | "remarks">) {
+    return request({
+        url: "/api/jobs/add",
+        method: "POST",
+        data: props
+    })
+}
+
+export function updateJob(props: Pick<Job, "ecosystemId"
+    | "homepage" | "description" | "networkId" | "remarks" | "id">) {
+    return request({
+        url: "/api/jobs/update",
+        method: "POST",
+        data: props
+    })
+}
+
+export function deleteJob(id: number) {
+    return request({
+        url: "/api/jobs/delete",
+        method: "POST",
+        data: {
+            id,
+        }
+    })
+}
 
 

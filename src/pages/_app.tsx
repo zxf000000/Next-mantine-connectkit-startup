@@ -57,7 +57,6 @@ function App({Component, pageProps}: AppPropsWithLayout) {
                         signOutOnAccountChange={true} // defaults true
                         signOutOnNetworkChange={true} // defaults true
                         onSignIn={(session?: SIWESession) => {
-                            console.log(session);
                         }}
                         onSignOut={() => {}}
                     >
