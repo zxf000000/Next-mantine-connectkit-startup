@@ -57,7 +57,7 @@ const WalletsPage: NextPageWithLayout = () => {
     }
 
     return (
-        <Container>
+        <Container fluid>
             <Flex align={"center"} justify={"flex-end"}>
                 <Button onClick={() => {
                     setCurrentWallet(null);

@@ -55,4 +55,33 @@ export function useChains() {
     }
 }
 
+export function useCategories() {
+    const {data, mutate, error, loading} = useRequest({
+        url: "/api/categories",
+        method: "GET",
+        enabled: true
+    })
+    return {
+        data,
+        mutate,
+        loading,
+        error,
+    }
+}
+
+export function useEcosystems() {
+    const {data, mutate, error, loading} = useRequest({
+        url: "/api/ecosystems",
+        method: "GET",
+        enabled: true
+    })
+    return {
+        data,
+        mutate,
+        loading,
+        error,
+    }
+}
+
+
 

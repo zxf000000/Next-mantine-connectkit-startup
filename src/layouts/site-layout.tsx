@@ -3,7 +3,7 @@ import {AppShell, Box, createStyles, Header, List, Navbar, NavLink} from "@manti
 import Appbar from "@/components/app-bar";
 import AppFooter from "@/components/app-footer";
 import {ListItem} from "@mantine/core/lib/List/ListItem/ListItem";
-import {IconHome, IconLoader, IconPrompt, IconUser, IconWallet, IconWorld} from "@tabler/icons-react";
+import {IconCategory, IconHome, IconLoader, IconPrompt, IconUser, IconWallet, IconWorld} from "@tabler/icons-react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {IconNetwork} from "@tabler/icons-react";
@@ -34,6 +34,9 @@ const navs = [
     },
     {
         label: "网络", icon: IconNetwork, href: "/chains"
+    },
+    {
+        label: "类别管理", icon: IconCategory, href: "/categories"
     }
 ]
 

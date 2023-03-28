@@ -3,21 +3,21 @@ import {ActionIcon, Button, Container, Flex, Modal, Space, Table, Title} from "@
 import {getLayout} from "@/layouts/site-layout";
 import {useEffect, useState} from "react";
 import AddChainModal from "@/components/add-chain-modal";
-import {Chain} from "@prisma/client";
-import {useChains} from "@/utils/api/fetches";
+import {Category, Chain} from "@prisma/client";
+import {useChains, useCategories} from "@/utils/api/fetches";
 import {IconEdit, IconTrash} from "@tabler/icons-react";
-import {Wallet} from "@/utils/data-types";
-import {deleteChain, deleteWallet} from "@/utils/api/posts";
 import {showError, showSuccess} from "@/notification";
+import { deleteCategory } from "@/utils/api/posts";
+import AddCategoryModal from "@/components/add-category-modal";
 
 const ChainsPage: NextPageWithLayout = () => {
     const [openModal, setOpenModal] = useState(false);
-    const [currentChain, setCurrentChain] = useState<Chain | null>(null);
-    const [chains, setChains] = useState<Chain[]>([]);
-    const {data, loading, mutate} = useChains();
+    const [currentChain, setCurrentChain] = useState<Category | null>(null);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const {data, loading, mutate} = useCategories();
     useEffect(() => {
         if (data) {
-            setChains(data);
+            setCategories(data);
         }
     }, [data]);
     const handleCloseModal = () => {
@@ -30,7 +30,7 @@ const ChainsPage: NextPageWithLayout = () => {
         setCurrentChain(null);
         setOpenModal(true);
     }
-    const handleEditItem = (item: Chain) => {
+    const handleEditItem = (item: Category) => {
         setCurrentChain(item);
         setOpenModal(true);
     }
@@ -40,7 +40,7 @@ const ChainsPage: NextPageWithLayout = () => {
     const handleConfirmClose = () => {
         setConfirmOpen(false);
     }
-    const handleDeleteItem = (chain: Chain) => {
+    const handleDeleteItem = (chain: Category) => {
         setCurrentChain(chain);
         setConfirmOpen(true);
     }
@@ -48,7 +48,7 @@ const ChainsPage: NextPageWithLayout = () => {
     const handleConfirmDelete = async () => {
         setDeleting(true);
         try {
-            await deleteChain(currentChain?.id || 0);
+            await deleteCategory(currentChain?.id || 0);
             setConfirmOpen(false);
             setDeleting(false);
             showSuccess("Success!");
@@ -60,7 +60,7 @@ const ChainsPage: NextPageWithLayout = () => {
     }
 
     return <Container fluid>
-        <Title>Chains</Title>
+        <Title>类别</Title>
         <Flex justify={"flex-end"}>
             <Button onClick={handleTapAdd}>
                 添加
@@ -77,13 +77,7 @@ const ChainsPage: NextPageWithLayout = () => {
                     名称
                 </th>
                 <th>
-                    ChainID
-                </th>
-                <th>
-                    Rpc
-                </th>
-                <th>
-                    浏览器
+                    说明
                 </th>
                 <th>
                     操作
@@ -92,7 +86,7 @@ const ChainsPage: NextPageWithLayout = () => {
             </thead>
             <tbody>
             {
-                chains.map((item, index) => (
+                categories.map((item, index) => (
                     <tr key={index}>
                         <td>
                             {item.id}
@@ -101,13 +95,7 @@ const ChainsPage: NextPageWithLayout = () => {
                             {item.name}
                         </td>
                         <td>
-                            {item.chainId}
-                        </td>
-                        <td>
-                            {item.rpc}
-                        </td>
-                        <td>
-                            {item.explore}
+                            {item.description}
                         </td>
                         <td>
                             <Flex gap={"sm"}>
@@ -140,7 +128,8 @@ const ChainsPage: NextPageWithLayout = () => {
             </Flex>
 
         </Modal>
-        <AddChainModal show={openModal} onClose={handleCloseModal} onCreated={handleCreated} chain={currentChain} />
+        <AddCategoryModal show={openModal} onClose={handleCloseModal} onCreated={handleCreated}
+                       category={currentChain} />
     </Container>
 }
 

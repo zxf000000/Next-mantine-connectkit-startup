@@ -15,23 +15,16 @@ const handler: NextApiHandler = async (req, res) => {
                     }
                 })
                 if (user) {
-                    console.log(req.body);
-                    const ecosystem = await prisma.ecosystem.create({
+                    const category = await prisma.category.update({
+                        where: {
+                          id: req.body.id
+                        },
                         data: {
                             name: req.body.name,
-                            logo: req.body.logo,
-                            homepage: req.body.homepage,
-                            chainId: req.body.chainId,
-                            category_id: req.body.category_id,
-                            is_ico: req.body.is_ico,
-                            twitter_fans: req.body.twitter_fans,
-                            description: req.body.description,
-                            financing: req.body.financing,
-                            suggestion: req.body.suggestion,
-                            user_id: user.id
+                            description: req.body.description
                         }
                     })
-                    res.status(200).json(ecosystem);
+                    res.status(200).json(category);
                 } else {
                     res.status(404).end();
                 }

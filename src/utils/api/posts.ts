@@ -1,5 +1,5 @@
 import request from "@/utils/api/request";
-import {Chain} from "@prisma/client";
+import {Category, Chain, Ecosystem} from "@prisma/client";
 
 type AddWalletProps = {
     address: string,
@@ -61,3 +61,69 @@ export function deleteChain(id: number) {
         }
     })
 }
+
+export function addCategory(props: Pick<Category, "name" | "description">) {
+    return request({
+        url: "/api/categories/add",
+        method: "POST",
+        data: props
+    })
+}
+
+export function updateCategory(props: Pick<Category, "name" | "description" | "id">) {
+    return request({
+        url: "/api/categories/update",
+        method: "POST",
+        data: props
+    })
+}
+
+export function deleteCategory(id: number) {
+    return request({
+        url: "/api/categories/delete",
+        method: "POST",
+        data: {
+            id,
+        }
+    })
+}
+
+type EcoProps =  Pick<Ecosystem, "name"
+    | "description"
+    | "homepage"
+    | "twitter_fans"
+    | "category_id"
+    | "logo"
+    | "is_ico"
+    | "financing"
+    | "suggestion" | "chainId">
+
+export function addEcosystem(props: EcoProps) {
+    return request({
+        url: "/api/ecosystems/add",
+        method: "POST",
+        data: props
+    })
+}
+
+export function updateEcosystem(props: Pick<Ecosystem, "name" | "description" | "homepage" | "twitter_fans" | "category_id"
+    | "logo" | "is_ico" | "financing" | "suggestion" | "id">) {
+    return request({
+        url: "/api/ecosystems/update",
+        method: "POST",
+        data: props
+    })
+}
+
+export function deleteEcosystem(id: number) {
+    return request({
+        url: "/api/ecosystems/delete",
+        method: "POST",
+        data: {
+            id,
+        }
+    })
+}
+
+
+

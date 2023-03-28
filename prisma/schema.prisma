@@ -17,7 +17,7 @@ model User {
   wallets    Wallet[]
   ecosystoms Ecosystem[]
   jobs       Job[]
-  chains      Chain[]
+  chains     Chain[]
 }
 
 model Category {
@@ -28,14 +28,15 @@ model Category {
 }
 
 model Chain {
-  id      Int    @id @default(autoincrement())
-  chainId String
-  name    String
-  rpc     String
-  explore String
-  jobs    Job[]
-  user    User   @relation(fields: [userId], references: [id])
-  userId  String
+  id        Int         @id @default(autoincrement())
+  chainId   String
+  name      String
+  rpc       String
+  explore   String
+  jobs      Job[]
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String
+  Ecosystem Ecosystem[]
 }
 
 model Ecosystem {
@@ -43,11 +44,12 @@ model Ecosystem {
   name         String
   logo         String
   homepage     String
-  chain_id     String
+  chain        Chain    @relation(fields: [chainId], references: [id])
+  chainId      Int
   category     Category @relation(fields: [category_id], references: [id])
   category_id  Int
   is_ico       Boolean
-  twitter_fans Int
+  twitter_fans String
   description  String
   financing    String
   suggestion   String
