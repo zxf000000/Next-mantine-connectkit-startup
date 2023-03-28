@@ -6,12 +6,11 @@ import {NextPage} from "next";
 import {ReactElement, ReactNode} from "react";
 import {bscTestnet} from "wagmi/chains";
 import {createClient, WagmiConfig} from "wagmi";
-import {ConnectKitProvider, getDefaultClient, SIWEProvider, SIWESession} from "connectkit";
+import {ConnectKitProvider, getDefaultClient, SIWESession} from "connectkit";
 import process from "process";
 import NextNProgress from 'nextjs-progressbar';
 import Theme from "@/theme/index";
 import { Notifications } from '@mantine/notifications';
-import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
 import { siweClient } from "@/utils/siweClient";
 

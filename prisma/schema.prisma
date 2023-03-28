@@ -17,6 +17,7 @@ model User {
   wallets    Wallet[]
   ecosystoms Ecosystem[]
   jobs       Job[]
+  chains      Chain[]
 }
 
 model Category {
@@ -33,6 +34,8 @@ model Chain {
   rpc     String
   explore String
   jobs    Job[]
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
 }
 
 model Ecosystem {

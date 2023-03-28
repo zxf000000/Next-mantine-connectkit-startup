@@ -35,7 +35,6 @@ const AddWalletDialog = ({show, onClose, onCreated, wallet}: Props) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        console.log("wallet ", wallet);
         if (wallet) {
             setFpNumber(wallet.fp_number);
             setAddress(wallet.address);

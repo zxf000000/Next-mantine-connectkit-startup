@@ -41,5 +41,18 @@ export function useWallets() {
     }
 }
 
+export function useChains() {
+    const {data, mutate, error, loading} = useRequest({
+        url: "/api/chains",
+        method: "GET",
+        enabled: true
+    })
+    return {
+        data,
+        mutate,
+        loading,
+        error,
+    }
+}
 
 
