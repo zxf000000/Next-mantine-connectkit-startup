@@ -54,7 +54,6 @@ const getSession = async <TSessionData extends Object = {}>(
         res,
         sessionConfig
     )) as NextSIWESession<TSessionData>;
-    console.log("session  ", session);
     return session;
 };
 

@@ -153,3 +153,14 @@ export function deleteJob(id: number) {
 }
 
 
+export function markCompleteJobWithWallet(jobId: number, walletId: number) {
+    return request({
+        url: "/api/jobs/completeWithWallet",
+        method: "POST",
+        data: {
+            jobId,
+            walletId,
+        }
+    })
+}
+

@@ -5,6 +5,7 @@ import {PrismaClient} from "@prisma/client";
 const prisma = new PrismaClient();
 
 const handler: NextApiHandler = async (req, res) => {
+    const {id} = req.query;
     switch (req.method) {
         case 'GET':
             const {address} = await siweServer.getSession(req, res);
@@ -13,14 +14,18 @@ const handler: NextApiHandler = async (req, res) => {
                     address
                 }
             })
-            console.log(user);
             if (user) {
-                const wallets = await prisma.wallet.findMany({
+                const jobs = await prisma.job.findFirst({
                     where: {
-                        user_id: user?.id,
+                        userId: user.id,
+                        id: Number(id as string),
+                    },
+                    include: {
+                        ecosystem: true,
+                        network: true,
                     }
                 });
-                res.status(200).json(wallets);
+                res.status(200).json(jobs);
             } else {
                 res.status(200).json([]);
             }

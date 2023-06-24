@@ -67,10 +67,9 @@ model Job {
   network     Chain     @relation(fields: [networkId], references: [id])
   networkId   Int
   remarks     String
-  doneWallets Wallet[]
+  doneWallets JobDone[]
   user        User      @relation(fields: [userId], references: [id])
   userId      String
-  JobDone     JobDone[]
 }
 
 model SocialAccout {
@@ -97,8 +96,7 @@ model Wallet {
   user      User      @relation(fields: [user_id], references: [id])
   user_id   String
   mm_pwd    String
-  doneJobs  Job[]
-  JobDone   JobDone[]
+  doneJobs  JobDone[]
 }
 
 model JobDone {

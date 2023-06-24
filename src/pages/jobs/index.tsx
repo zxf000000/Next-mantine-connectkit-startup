@@ -12,6 +12,7 @@ import AddEcosystemModal from "@/components/add-ecosystem-modal";
 import LmTable from "@/components/lm-table";
 import AddJobsModal from "@/components/add-jobs-modal";
 import {JobModel} from "@/utils/data-types";
+import Link from "next/link";
 
 const JobsPage: NextPageWithLayout = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -83,16 +84,7 @@ const JobsPage: NextPageWithLayout = () => {
                     网站
                 </th>
                 <th>
-                    说明
-                </th>
-                <th>
                     网络
-                </th>
-                <th>
-                    备注
-                </th>
-                <th>
-                    是否完成
                 </th>
                 <th>
                     操作
@@ -104,7 +96,11 @@ const JobsPage: NextPageWithLayout = () => {
                 items.map((item, index) => (
                     <tr key={index}>
                         <td>
-                            {item.id}
+                            <Link href={"/jobs/" + item.id} style={{
+                                minWidth: "100px"
+                            }}>
+                                {item.id}
+                            </Link>
                         </td>
                         <td>
                             <Flex>
@@ -118,16 +114,7 @@ const JobsPage: NextPageWithLayout = () => {
                             {item.homepage}
                         </td>
                         <td>
-                            {item.description}
-                        </td>
-                        <td>
                             {item.network.name}
-                        </td>
-                        <td>
-                            {item.remarks}
-                        </td>
-                        <td>
-                            false
                         </td>
                         <td>
                             <Flex gap={"sm"}>

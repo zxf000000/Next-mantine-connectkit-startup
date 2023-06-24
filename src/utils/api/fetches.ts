@@ -97,6 +97,32 @@ export function useJobs() {
     }
 }
 
+export function useJob(id: number) {
+    const {data, mutate, error, loading} = useRequest({
+        url: "/api/jobs/" + id,
+        method: "GET",
+        enabled: Boolean(id)
+    })
+    return {
+        data,
+        mutate,
+        loading,
+        error,
+    }
+}
 
+export function useWalletsWithJob(jobId: number) {
+    const {data, mutate, error, loading} = useRequest({
+        url: "/api/wallets/withJob?jobId=" + jobId,
+        method: "GET",
+        enabled: Boolean(jobId)
+    })
+    return {
+        data,
+        mutate,
+        loading,
+        error,
+    }
+}
 
 
