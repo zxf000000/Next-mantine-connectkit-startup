@@ -152,7 +152,6 @@ const WalletsPage: NextPageWithLayout = () => {
                         确定
                     </Button>
                 </Flex>
-
             </Modal>
         </Container>
     )

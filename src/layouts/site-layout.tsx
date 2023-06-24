@@ -39,7 +39,7 @@ const navs = [
         label: "钱包", icon: IconWallet, href: "/wallets",
     },
     {
-        label: "三件套", icon: IconUser, href: "/sanjiantao",
+        label: "accounts", icon: IconUser, href: "/sanjiantao",
     },
     {
         label: "总进度", icon: IconLoader, href: "/progresses",

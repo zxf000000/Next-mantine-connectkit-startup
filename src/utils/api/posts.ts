@@ -1,5 +1,6 @@
 import request from "@/utils/api/request";
 import {Category, Chain, Ecosystem, Job} from "@prisma/client";
+import {SocialAccout} from ".prisma/client";
 
 type AddWalletProps = {
     address: string,
@@ -153,6 +154,7 @@ export function deleteJob(id: number) {
 }
 
 
+
 export function markCompleteJobWithWallet(jobId: number, walletId: number) {
     return request({
         url: "/api/jobs/completeWithWallet",
@@ -164,3 +166,30 @@ export function markCompleteJobWithWallet(jobId: number, walletId: number) {
     })
 }
 
+
+
+export function addSocialAccount(props: Omit<SocialAccout, "id">) {
+    return request({
+        url: "/api/accounts/add",
+        method: "POST",
+        data: props
+    })
+}
+
+export function updateSocialAccount(props: SocialAccout) {
+    return request({
+        url: "/api/accounts/update",
+        method: "POST",
+        data: props
+    })
+}
+
+export function deleteSocialAccount(id: number) {
+    return request({
+        url: "/api/accounts/delete",
+        method: "POST",
+        data: {
+            id,
+        }
+    })
+}

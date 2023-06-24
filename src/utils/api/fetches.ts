@@ -97,6 +97,20 @@ export function useJobs() {
     }
 }
 
+export function useSocialAccounts() {
+    const {data, mutate, error, loading} = useRequest({
+        url: "/api/accounts",
+        method: "GET",
+        enabled: true,
+    })
+    return {
+        data,
+        loading,
+        mutate,
+        error
+    }
+}
+
 export function useJob(id: number) {
     const {data, mutate, error, loading} = useRequest({
         url: "/api/jobs/" + id,

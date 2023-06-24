@@ -75,9 +75,9 @@ model Job {
 model SocialAccout {
   id            Int     @id @default(autoincrement())
   fp_number     String? @unique
-  phone         Int?
+  phone         String?
   country       String?
-  paassword     String?
+  password     String?
   gmail         String?
   verifier      String?
   assist_email  String?
